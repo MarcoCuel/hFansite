@@ -34,5 +34,5 @@ function featured() {
 		'supports'           => array('title', 'editor')
 	);
 
-	register_post_type( 'destaques', $args );
+	register_post_type( 'destaque', $args );
 }

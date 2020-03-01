@@ -57,7 +57,7 @@ get_header();
 					// Slá
 				}
 
-				// echo '<script>location.href="'.get_permalink($post_id).'"</script>';
+				echo '<script>location.href="'.get_permalink($post_id).'"</script>';
 			endif;
 		}
 	}
@@ -88,7 +88,7 @@ get_header();
 
 						<div class="form-group">
 							<label for="title">Imagem</label>
-							<input type="file" name="thumbnail" class="form-control">
+							<input type="file" name="thumbnail" class="form-control files">
 						</div>
 
 						<div class="form-group">
@@ -97,13 +97,12 @@ get_header();
 						</div>
 
 						<div class="form-group">
-							<label for="tags">Tags</label>
+							<label for="tags">Tags <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="Vírgula ou enter para concluir. backspace ou delete para remover."></i></label>
 							<input name="tags" type="text" class="form-control" id="tags">
-							<small class="text-muted">Separadas por virgula</small>
 						</div>
 
 						<div class="form-group">
-							<label for="content">Descrição</label>
+							<label for="content">Descrição <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="URLs são vinculadas automaticamente. Quebras de linha e parágrafos são gerados automaticamente. as tags a, em, strong e code são aceitas."></i></label>
 							<textarea name="body" class="form-control" id="content" placeholder="Escrevar algo..."></textarea>
 						</div>
 

@@ -33,6 +33,10 @@
 				) );
 			?>
 
+			<!-- <a href="#" style="font-size: 1.25rem" data-toggle="modal" data-target="#exampleModal">
+				<i class="fas fa-gift p-2" data-toggle="tooltip" data-placement="right" title="Presentes diários"></i>
+			</a> -->
+
 			<div class="d-flex justify-content-center align-items-center ml-auto mt-3 mt-lg-0">
 				<?php if ( is_user_logged_in() ): ?>
 					<?php global $current_user; wp_get_current_user();?>

@@ -57,7 +57,7 @@ function better_comments( $comment, $args, $depth ) {
 
 					<?php
 						global $post;
-						if ( $comment->user_id === $post->post_author ) { echo '<span class="badge badge-primary ml-2">Autor</span>'; }
+						if ( $comment->user_id === $post->post_author ) { echo '<span class="badge badge-primary ml-2 mr-auto">Autor</span>'; }
 					?>
 
 					<?php

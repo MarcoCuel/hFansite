@@ -1,6 +1,7 @@
 <?php
 
 require_once TT_FUNCTIONS . '/utils.php';
+require_once TT_FUNCTIONS . '/login.php';
 require_once TT_FUNCTIONS . '/post-types.php';
 require_once TT_FUNCTIONS . '/metabox.php';
 require_once TT_FUNCTIONS . '/theme-options.php';

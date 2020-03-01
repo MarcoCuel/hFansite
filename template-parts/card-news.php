@@ -6,7 +6,11 @@
 			<img src="<?php bloginfo('template_directory'); ?>/assets/image/default-cover.png" alt="<?php the_title(); ?>" />
 		<?php endif; ?>
 
-		<?php if (is_sticky()) { echo '<div class="live">Acompanhe</div>'; } ?>
+		<?php
+		$alert_name = get_post_meta( get_the_ID(), 'alert_name', true );
+		if( !empty( $alert_name) ) : ?>
+			<div class="live <?php echo $alert_color; ?>"><?php echo $alert_name; ?></div>
+		<?php endif; ?>
 
 		<?php $category = get_the_category(); ?>
 		<div class="cat <?php echo $category[0]->slug; ?>" data-toggle="tooltip" data-html="true" title="<?php echo $category[0]->name; ?>">
@@ -19,7 +23,7 @@
 		$cg_name = get_post_meta( get_the_ID(), 'cg_name', true );
 		$cg_url = get_post_meta( get_the_ID(), 'cg_url', true );
 		if( !empty( $cg_name) ) : ?>
-			<div class="badge" data-toggle="tooltip" data-html="true" title="<strong><?php echo esc_attr( get_post_meta( get_the_ID(), 'cg_name', true ) ); ?></strong>">
+			<div class="box" data-toggle="tooltip" data-html="true" title="<strong><?php echo esc_attr( get_post_meta( get_the_ID(), 'cg_name', true ) ); ?></strong>">
 				<?php if( !empty( $cg_url) ) : ?>
 					<img src="<?php echo esc_attr( get_post_meta( get_the_ID(), 'cg_url', true ) ); ?>">
 				<?php else: ?>
@@ -27,7 +31,7 @@
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-		<h5 class="card-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h5>
+		<h5 class="card-title mb-4"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h5>
 		<div class="card-text">
 			<div class="avatar pixel sm mr-2">
 				<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo get_the_author_meta('user_login'); ?>">

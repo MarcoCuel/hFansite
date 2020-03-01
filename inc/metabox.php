@@ -4,7 +4,7 @@
 add_action("admin_init", "users_meta_init");
 
 function users_meta_init(){
-	add_meta_box("users-meta", "Selecionar usuário", "users", "destaques", "side", "high");
+	add_meta_box("users-meta", "Selecionar usuário", "users", "destaque", "side", "high");
 }
 
 function users(){
@@ -108,6 +108,55 @@ function cg_save_meta_box( $post_id ) {
 	 }
 }
 add_action( 'save_post', 'cg_save_meta_box' );
+
+
+
+function alert_register_meta_boxes() {
+	add_meta_box( 'alert-1', 'Alerta (Live)', 'alert_display_callback', 'post' );
+}
+add_action( 'add_meta_boxes', 'alert_register_meta_boxes' );
+
+
+function alert_display_callback( $post ) { ?>
+
+<div class="alert_box">
+	<style scoped>
+		.alert_box{
+			display: grid;
+			grid-template-columns: max-content 1fr;
+			grid-row-gap: 16px;
+			grid-column-gap: 16px;
+		}
+		.alert_field{
+			display: contents;
+		}
+	</style>
+	<p class="meta-options alert_field">
+		<label for="alert_name">Título</label>
+		<input id="alert_name"
+			type="text"
+			name="alert_name"
+			value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'alert_name', true ) ); ?>">
+	</p>
+</div>
+
+<?php }
+
+function alert_save_meta_box( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( $parent_id = wp_is_post_revision( $post_id ) ) {
+		$post_id = $parent_id;
+	}
+	$fields = [
+		'alert_name',
+	];
+	foreach ( $fields as $field ) {
+		if ( array_key_exists( $field, $_POST ) ) {
+			update_post_meta( $post_id, $field, sanitize_text_field( $_POST[$field] ) );
+		}
+	 }
+}
+add_action( 'save_post', 'alert_save_meta_box' );
 
 
 

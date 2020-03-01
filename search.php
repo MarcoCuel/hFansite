@@ -39,6 +39,10 @@ $wp_user_query = new WP_User_Query( array(
 							<div class="thumb box user pixel">
 								<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&size=b" alt="<?php echo get_the_author_meta('user_login'); ?>">
 							</div>
+						<?php elseif( 'destaque' === get_post_type() ): ?>
+							<div class="thumb box user pixel">
+								<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php the_title(); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&size=b" alt="<?php the_title(); ?>">
+							</div>
 						<?php else: ?>
 							<div class="thumb box pixel">
 								<img src="<?php bloginfo("template_directory")?>/assets/image/box.png">

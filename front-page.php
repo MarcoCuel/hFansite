@@ -10,6 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3 pr-md-3">
+
 				<div class="section-title">
 					<h3>Publicidade</h3>
 				</div>
@@ -22,18 +23,18 @@
 					$count = 0;
 					$query = new WP_Query( $args );
 				?>
-				<?php if (  $query->have_posts() ) : ?>
+				<?php if ( $query->have_posts() ) : ?>
 					<div class="card">
 						<div id="carouselAds" class="carousel ads slide" data-ride="carousel">
 							<ol class="carousel-indicators">
-								<?php while (  $query->have_posts() ) :  $query->the_post(); ?>
+								<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 									<li data-target="#carouselAds" data-slide-to="<?php echo ($count)?>" class="<?php echo ($count == 0) ? 'active' : ''; ?>"></li>
 								<?php $count++; ?>
 								<?php endwhile; ?>
 							</ol>
 							<div class="carousel-inner">
 								<?php $count = 0; ?>
-								<?php while (  $query->have_posts() ) :  $query->the_post(); ?>
+								<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 									<div class="carousel-item <?php echo ($count == 0) ? 'active' : ''; ?>">
 										<img src="<?php echo the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
 										<div class="carousel-caption">
@@ -55,23 +56,31 @@
 				<?php endif; ?>
 				<?php wp_reset_postdata(); ?>
 
+				<div class="section-title mt-4">
+					<h3>Parceiros</h3>
+					<strong><a href="<?php echo home_url() ?>#">Saiba mais</a></strong>
+				</div>
+
 				<div class="card">
-					<div class="card-body text-center">
-						<h6 class="mb-3">Siga-nos</h6>
-						<ul class="social">
-							<li class="fb">
-								<i class="fab fa-facebook-f"></i>
-							</li>
-							<li class="tt">
-								<i class="fab fa-twitter"></i>
-							</li>
-							<li class="ig">
-								<i class="fab fa-instagram"></i>
-							</li>
-							<li class="yt">
-								<i class="fab fa-youtube"></i>
-							</li>
-						</ul>
+					<div class="card-body text-muted pixel d-flex justify-content-center align-items-center">
+
+						<?php
+							$args = array(
+								'post_type' => 'parceiro',
+								'order' => 'DESC',
+							);
+
+							$query = new WP_Query( $args );
+						?>
+
+						<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
+							<div class="px-2" data-toggle="tooltip" title="<?php the_title(); ?>">
+								<img src="<?php echo the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+							</div>
+						<?php endwhile; else: ?>
+							<strong>Nenhum ainda</strong>
+						<?php endif; ?>
+						<?php wp_reset_postdata(); ?>
 					</div>
 				</div>
 			</div>
@@ -92,7 +101,7 @@
 						$query = new WP_Query( $args );
 					?>
 
-					<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="col-sm-6 col-lg-4">
 							<?php get_template_part( 'template-parts/card', 'news') ?>
 						</div>
@@ -130,7 +139,7 @@
 						$query = new WP_Query( $args );
 					?>
 
-					<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="col-sm-6">
 							<?php get_template_part( 'template-parts/card', 'topic') ?>
 						</div>
@@ -161,7 +170,7 @@
 						$query = new WP_Query( $args );
 					?>
 
-					<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="col-4 col-sm-3 col-lg-2">
 							<?php get_template_part( 'template-parts/card', 'free') ?>
 						</div>
@@ -193,7 +202,7 @@
 						$query = new WP_Query( $args );
 					?>
 
-					<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="col-sm-6 col-md-4 col-lg-12">
 							<?php get_template_part( 'template-parts/card', 'event') ?>
 						</div>
@@ -215,19 +224,25 @@
 				</div>
 
 				<div class="card">
-					<div class="card-body pixel d-flex justify-content-center align-items-center">
-						<div class="p-2">
-							<img src="<?php echo get_template_directory_uri()?>/duck.png" alt="Puhekupla" data-toggle="tooltip" title="Puhekupla">
-						</div>
-						<div class="p-2">
-							<img src="<?php echo get_template_directory_uri()?>/hb.png" alt="Habborator" data-toggle="tooltip" title="Habborator">
-						</div>
-						<div class="p-2">
-							<img src="<?php echo get_template_directory_uri()?>/hbs.png" alt="Habbies" data-toggle="tooltip" title="Habbies">
-						</div>
-						<div class="p-2">
-							<img src="<?php echo get_template_directory_uri()?>/ht.png" alt="HabboTravel" data-toggle="tooltip" title="HabboTravel">
-						</div>
+					<div class="card-body text-muted pixel d-flex justify-content-center align-items-center">
+
+						<?php
+							$args = array(
+								'post_type' => 'parceiro',
+								'order' => 'DESC',
+							);
+
+							$query = new WP_Query( $args );
+						?>
+
+						<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
+							<div class="p-2" data-toggle="tooltip" title="<?php the_title(); ?>">
+								<img src="<?php echo the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+							</div>
+						<?php endwhile; else: ?>
+							<strong>Nenhum ainda</strong>
+						<?php endif; ?>
+						<?php wp_reset_postdata(); ?>
 					</div>
 				</div>
 			</div>
@@ -254,7 +269,7 @@
 				$query = new WP_Query( $args );
 			?>
 
-			<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+			<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<?php get_template_part( 'template-parts/card', 'gallery') ?>
 				</div>
@@ -290,14 +305,14 @@
 					<?php
 						$args = array(
 							'posts_per_page' => 2,
-							'post_type' => 'destaques',
+							'post_type' => 'destaque',
 							'order' => 'DESC',
 						);
 
 						$query = new WP_Query( $args );
 					?>
 
-					<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+					<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 						<?php get_template_part( 'template-parts/card', 'featured') ?>
 					<?php endwhile; else: ?>
 						<div class="card">
@@ -331,7 +346,7 @@
 					$query = new WP_Query( $args );
 				?>
 
-				<?php if (  $query->have_posts() ) : while (  $query->have_posts() ) :  $query->the_post(); ?>
+				<?php if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post(); ?>
 					<?php get_template_part( 'template-parts/card', 'gallery') ?>
 				<?php endwhile; else: ?>
 					<div class="card">

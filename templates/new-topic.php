@@ -89,15 +89,15 @@ get_header();
 
 						<div class="form-group">
 							<label for="title">Título</label>
-							<input name="title" type="text" class="form-control" id="title" placeholder="Título">
+							<input name="title" type="text" class="form-control" id="title" placeholder="Título" required="">
 						</div>
 
 						<div class="form-group">
 							<label for="content">Conteúdo</label>
-							<textarea name="body" class="form-control" rows="4" id="content" placeholder="Escrevar algo..."></textarea>
+							<textarea name="body" class="form-control" rows="4" id="content" placeholder="Escrevar algo..." required=""></textarea>
 						</div>
 
-						<button type="submit" name="submit" class="btn btn-lg btn-block btn-primary mt-4">Publicar</button>
+						<button type="submit" name="submit" class="btn btn-lg btn-block btn-primary mt-4" >Publicar</button>
 						
 					</form>
 

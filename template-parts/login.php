@@ -1,9 +1,5 @@
 <?php global $user_login;
 
-	if ( isset( $_GET['login'] ) && $_GET['login'] == 'failed' ) : ?>
-		<div class="alert alert-danger">Erro: Tente novamente!</div>
-	<?php endif;
-
 	if ( is_user_logged_in() ) : ?>
 
 	<div class="text-center"> 
@@ -14,17 +10,7 @@
 
 <?php else: 
 		
-			// Login form arguments.
-			$args = array(
-				'echo'		 => true,
-				'redirect'	 => home_url(), 
-				'remember'	 => true,
-				'value_username' => NULL,
-				'value_remember' => true
-			); 
-			
-			// Calling the login form.
-			wp_login_form( $args ); ?>
+		echo do_shortcode('[login-box]') ?>
 
 		<hr class="ou my-4">
 

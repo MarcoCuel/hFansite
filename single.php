@@ -33,8 +33,8 @@
 				</div>
 
 				<div class="mx-3 mt-3">
-					<i class="fas fa-comment-alt mr-2"></i>
-					<?php echo get_comments_number_text(); ?>
+					<a href="#comments"><i class="fas fa-comment-alt mr-2"></i>
+					<?php echo get_comments_number_text(); ?></a>
 				</div>
 
 				<?php edit_post_link('Editar', '<div class="mx-3 mt-3"><i class="fas fa-pen mr-2"></i> ', '</div>', '', 'text-inherit'); ?>
