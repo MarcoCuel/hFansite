@@ -162,35 +162,84 @@ function alert_save_meta_box( $post_id ) {
 add_action( 'save_post', 'alert_save_meta_box' );
 
 
+function ads_register_meta_boxes() {
+	add_meta_box( 'ads-1', 'Link', 'ads_display_callback', 'publicidade' );
+}
+add_action( 'add_meta_boxes', 'ads_register_meta_boxes' );
+
+
+function ads_display_callback( $post ) { ?>
+
+	<div class="ads_box">
+		<style scoped>
+			.ads_box{
+				align-items: center;
+				display: grid;
+				grid-template-columns: max-content 1fr;
+				grid-row-gap: 16px;
+				grid-column-gap: 16px;
+			}
+			.ads_field{
+				display: contents;
+			}
+		</style>
+		<p class="meta-options ads_field">
+			<label for="ads_name">URL</label>
+			<input id="ads_url"
+				type="text"
+				name="ads_url"
+				value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'ads_url', true ) ); ?>">
+		</p>
+	</div>
+
+<?php }
+
+function ads_save_meta_box( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( $parent_id = wp_is_post_revision( $post_id ) ) {
+		$post_id = $parent_id;
+	}
+	$fields = [
+		'ads_url',
+	];
+	foreach ( $fields as $field ) {
+		if ( array_key_exists( $field, $_POST ) ) {
+			update_post_meta( $post_id, $field, sanitize_text_field( $_POST[$field] ) );
+		}
+	 }
+}
+add_action( 'save_post', 'ads_save_meta_box' );
+
+
 function partner_register_meta_boxes() {
-	add_meta_box( 'partner-1', 'Informações', 'partner_display_callback', 'parceiro' );
+	add_meta_box( 'partner-1', 'Informações', 'ads_display_callback', 'parceiro' );
 }
 add_action( 'add_meta_boxes', 'partner_register_meta_boxes' );
 
 
 function partner_display_callback( $post ) { ?>
 
-<div class="partner_box">
-	<style scoped>
-		.partner_box{
-			align-items: center;
-			display: grid;
-			grid-template-columns: max-content 1fr;
-			grid-row-gap: 16px;
-			grid-column-gap: 16px;
-		}
-		.partner_field{
-			display: contents;
-		}
-	</style>
-	<p class="meta-options partner_field">
-		<label for="partner_name">URL</label>
-		<input id="partner_url"
-			type="text"
-			name="partner_url"
-			value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'partner_url', true ) ); ?>">
-	</p>
-</div>
+	<div class="partner_box">
+		<style scoped>
+			.partner_box{
+				align-items: center;
+				display: grid;
+				grid-template-columns: max-content 1fr;
+				grid-row-gap: 16px;
+				grid-column-gap: 16px;
+			}
+			.partner_field{
+				display: contents;
+			}
+		</style>
+		<p class="meta-options partner_field">
+			<label for="partner_name">URL</label>
+			<input id="partner_url"
+				type="text"
+				name="partner_url"
+				value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'partner_url', true ) ); ?>">
+		</p>
+	</div>
 
 <?php }
 

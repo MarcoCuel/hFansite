@@ -126,7 +126,6 @@ class Custom_Widget_Noticias extends WP_Widget {
 							<?php get_template_part( 'template-parts/card', 'news') ?>
 						</div>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -208,7 +207,6 @@ class Custom_Widget_Forum extends WP_Widget {
 							<?php get_template_part( 'template-parts/card', 'topic') ?>
 						</div>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -290,7 +288,6 @@ class Custom_Widget_Evento extends WP_Widget {
 							<?php get_template_part( 'template-parts/card', 'event') ?>
 						</div>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -373,7 +370,6 @@ class Custom_Widget_Coisas extends WP_Widget {
 							<?php get_template_part( 'template-parts/card', 'free') ?>
 						</div>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -455,7 +451,6 @@ class Custom_Widget_Galeria extends WP_Widget {
 							<?php get_template_part( 'template-parts/card', 'gallery') ?>
 						</div>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -530,7 +525,6 @@ class Custom_Widget_Publicidades extends WP_Widget {
 		$listings = new WP_Query();
 		$listings->query('post_type=publicidade&posts_per_page=' . $numberOfListings );	
 		if($listings->found_posts > 0) {
-			echo '<div class="card">';
 			echo '<div id="carouselAds" class="carousel ads slide" data-ride="carousel">';
 			echo '<ol class="carousel-indicators">';
 			$count = 0;
@@ -539,24 +533,30 @@ class Custom_Widget_Publicidades extends WP_Widget {
 					<li data-target="#carouselAds" data-slide-to="<?php echo ($count)?>" class="<?php echo ($count == 0) ? 'active' : ''; ?>"></li>
 				<?php
 				$count++;
-				echo $listItem; }
+			}
 			echo '</ol>';
 			echo '<div class="carousel-inner">';
+			wp_reset_postdata(); 
 			$count = 0;
 				while ($listings->have_posts()) {
 					$listings->the_post(); ?>
 						<div class="carousel-item <?php echo ($count == 0) ? 'active' : ''; ?>">
+							<?php $ads_url = get_post_meta( get_the_ID(), 'ads_url', true );
+							if( !empty( $ads_url) ) : ?>
+								<a href="<?php echo $ads_url; ?>" target="_blank">
+							<?php endif; ?>
 							<img src="<?php echo the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
 							<div class="carousel-caption">
 								<h5><?php the_title(); ?></h5>
-								<div><?php the_content(); ?></div>
+								<div><?php echo wp_strip_all_tags( get_the_content() );?></div>
 							</div>
+							<?php if( !empty( $ads_url) ) : ?>
+								</a>
+							<?php endif; ?>
 						</div>
 						<?php $count++; ?>
 					<?php
-					echo $listItem; 
 				}
-			echo '</div>';
 			echo '</div>';
 			echo '</div>';
 			wp_reset_postdata(); 
@@ -646,7 +646,6 @@ class Custom_Widget_Parceiro extends WP_Widget {
 							</a>
 						<?php endif; ?>
 					<?php
-					echo $listItem; 
 				}
 			echo '</div>';
 			echo '</div>';
