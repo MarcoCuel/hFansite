@@ -37,10 +37,23 @@
 					<?php echo get_comments_number_text(); ?></a>
 				</div>
 
-				<?php edit_post_link('Editar', '<div class="mx-3 mt-3"><i class="fas fa-pen mr-2"></i> ', '</div>', '', 'text-inherit'); ?>
+				<?php global $current_user; wp_get_current_user();
+				$author_id = get_the_author_meta('ID');
+				$current_id = $current_user->ID;
+				$is_editor = current_user_can('editor') || current_user_can('administrator');
+
+				if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) { ?>
+					<div class="mx-3 mt-3"><a href="#" data-toggle="modal" data-target="#editModal"><i class="fas fa-pen mr-2"></i> Editar</a></div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
+
+	<?php
+		if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) {
+			get_template_part( 'templates/edit-post');
+		}
+	?>
 
 	<section>
 		<div class="container">

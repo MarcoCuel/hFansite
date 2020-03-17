@@ -94,7 +94,7 @@ get_header();
 
 						<div class="form-group">
 							<label for="content">Conteúdo</label>
-							<textarea name="body" class="form-control" rows="4" id="content" placeholder="Escrevar algo..." required=""></textarea>
+							<?php wp_editor('', 'body', array('textarea_rows' => 15)); ?>
 						</div>
 
 						<button type="submit" name="submit" class="btn btn-lg btn-block btn-primary mt-4" >Publicar</button>

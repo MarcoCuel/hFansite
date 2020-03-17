@@ -19,7 +19,14 @@
 							<div class="text-muted">
 								por <strong><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" data-toggle="tooltip" title="<?php echo get_the_author_meta('user_login'); ?>"><?php echo get_the_author(); ?></a></strong>
 
-								<?php edit_post_link('Editar', '<span> · </span> ', '', '', 'text-inherit'); ?>
+								<?php global $current_user; wp_get_current_user();
+									$author_id = get_the_author_meta('ID');
+									$current_id = $current_user->ID;
+									$is_editor = current_user_can('editor') || current_user_can('administrator');
+
+									if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) { ?>
+										<span class="mx-1">·</span> <a href="#" data-toggle="modal" data-target="#editModal"> Editar</a>
+									<?php } ?>
 							</div>
 						</div>
 			
@@ -39,6 +46,13 @@
 				</div>
 			</div>
 		</div>
+
+		<?php
+			if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) {
+				get_template_part( 'templates/edit-post');
+			}
+		?>
+							
 		<div class="img-gallery">
 			<div class="reading-content size-b">
 				<img src="<?php echo the_post_thumbnail_url(); ?>">

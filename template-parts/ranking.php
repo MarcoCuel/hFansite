@@ -15,7 +15,7 @@ $results = $wpdb->get_results('
 
 <ul class='rank'>
 	<?php foreach($results as $result) { ?>
-		<li>
+		<li class="card">
 			<?php
 				$user = get_user_by( 'id', $result->user_id );
 				$name = $user->user_login;

@@ -312,7 +312,7 @@ function get_liked_icon() {
  */
 function get_unliked_icon() {
 	/* If already using Font Awesome with your theme, replace svg with: <i class="fa fa-heart-o"></i> */
-	$icon = '<i class="far fa-heart mr-1"></i>';
+	$icon = '<i class="fas fa-heart mr-1"></i>';
 	return $icon;
 } // get_unliked_icon()
 

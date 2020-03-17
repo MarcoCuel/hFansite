@@ -78,7 +78,7 @@
 					<div class="mr-4">
 						<label class="theme-switch mb-0" for="checkbox">
 							<i class="fas fa-moon text-muted"></i>
-							<input class="d-none" type="checkbox" id="checkbox" />
+							<input class="d-none" type="checkbox" id="checkbox" <?php echo $theme == 'dark' ? ' checked' : ''; ?> />
 						</label>
 					</div>
 

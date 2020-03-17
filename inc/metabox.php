@@ -57,6 +57,7 @@ function cg_display_callback( $post ) { ?>
 <div class="cg_box">
 	<style scoped>
 		.cg_box{
+			align-items: center;
 			display: grid;
 			grid-template-columns: max-content 1fr;
 			grid-row-gap: 16px;
@@ -80,12 +81,13 @@ function cg_display_callback( $post ) { ?>
 			name="cg_url"
 			value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'cg_url', true ) ); ?>">
 	</p>
+	<?php $selected = esc_attr( get_post_meta( get_the_ID(), 'cg_available', true ) ); ?>
 	<p class="meta-options cg_field">
-		<label for="cg_available">Indisponível</label>
-		<input id="cg_available"
-			type="text"
-			name="cg_available"
-			value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'cg_available', true ) ); ?>">
+		<label for="cg_available">Disponível?</label>
+		<select id="cg_available" name="cg_available">
+			<option value="sim" <?php selected( $selected, 'sim' ); ?>>Sim</option>
+			<option value="nao" <?php selected( $selected, 'nao' ); ?>>Não</option>
+		</select>
 	</p>
 </div>
 
@@ -122,6 +124,7 @@ function alert_display_callback( $post ) { ?>
 <div class="alert_box">
 	<style scoped>
 		.alert_box{
+			align-items: center;
 			display: grid;
 			grid-template-columns: max-content 1fr;
 			grid-row-gap: 16px;
@@ -159,6 +162,55 @@ function alert_save_meta_box( $post_id ) {
 add_action( 'save_post', 'alert_save_meta_box' );
 
 
+function partner_register_meta_boxes() {
+	add_meta_box( 'partner-1', 'Informações', 'partner_display_callback', 'parceiro' );
+}
+add_action( 'add_meta_boxes', 'partner_register_meta_boxes' );
+
+
+function partner_display_callback( $post ) { ?>
+
+<div class="partner_box">
+	<style scoped>
+		.partner_box{
+			align-items: center;
+			display: grid;
+			grid-template-columns: max-content 1fr;
+			grid-row-gap: 16px;
+			grid-column-gap: 16px;
+		}
+		.partner_field{
+			display: contents;
+		}
+	</style>
+	<p class="meta-options partner_field">
+		<label for="partner_name">URL</label>
+		<input id="partner_url"
+			type="text"
+			name="partner_url"
+			value="<?php echo esc_attr( get_post_meta( get_the_ID(), 'partner_url', true ) ); ?>">
+	</p>
+</div>
+
+<?php }
+
+function partner_save_meta_box( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( $parent_id = wp_is_post_revision( $post_id ) ) {
+		$post_id = $parent_id;
+	}
+	$fields = [
+		'partner_url',
+	];
+	foreach ( $fields as $field ) {
+		if ( array_key_exists( $field, $_POST ) ) {
+			update_post_meta( $post_id, $field, sanitize_text_field( $_POST[$field] ) );
+		}
+	 }
+}
+add_action( 'save_post', 'partner_save_meta_box' );
+
+
 
 
 function event_register_meta_boxes() {
@@ -172,6 +224,7 @@ function event_display_callback( $post ) { ?>
 <div class="event_box">
 	<style scoped>
 		.event_box{
+			align-items: center;
 			display: grid;
 			grid-template-columns: max-content 1fr;
 			grid-row-gap: 16px;

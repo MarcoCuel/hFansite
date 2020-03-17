@@ -8,8 +8,8 @@
 			<div class="reading-content size-b">
 				<div class="mb-4">
 					<h2><?php echo the_title() ?></h2>
-
-					<strong><a href="<?php echo home_url() ?>/c/forum/<?php echo $category->slug; ?>" class="text-orange"><?php echo $category->name; ?></strong></a></strong>
+					<?php $category = get_the_terms( $post->ID, 'category_forum' ); ?>
+					<strong><a href="<?php echo home_url() ?>/c/forum/<?php echo $category[0]->slug; ?>" class="text-orange"><?php echo $category[0]->name; ?></strong></a></strong>
 				</div>
 
 				<div class="card">
@@ -41,7 +41,15 @@
 
 									<div>
 										<?php echo getPostViews(get_the_ID()); ?>
-										<?php edit_post_link('Editar', '<span class="mx-1">·</span>', '', ''); ?>
+
+										<?php global $current_user; wp_get_current_user();
+										$author_id = get_the_author_meta('ID');
+										$current_id = $current_user->ID;
+										$is_editor = current_user_can('editor') || current_user_can('administrator');
+
+										if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) { ?>
+											<span class="mx-1">·</span> <a href="#" data-toggle="modal" data-target="#editModal"> Editar</a>
+										<?php } ?>
 									</div>
 								</div>
 
@@ -49,6 +57,12 @@
 									<?php the_content(); ?>
 								</div>
 							</div>
+
+							<?php
+								if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) {
+									get_template_part( 'templates/edit-post');
+								}
+							?>
 						</div>
 					</div>
 				</div>

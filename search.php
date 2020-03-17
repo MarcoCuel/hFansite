@@ -35,7 +35,11 @@ $wp_user_query = new WP_User_Query( array(
 							<img src="<?php echo get_the_post_thumbnail_url(); ?>">
 						</div>
 					<?php else: ?>
-						<?php if( 'forum' === get_post_type() ): ?>
+						<?php if( 'post' === get_post_type() ): ?>
+							<div class="thumb">
+								<img src="<?php bloginfo('template_directory'); ?>/assets/image/default-cover.png" alt="<?php the_title(); ?>" />
+							</div>
+						<?php elseif( 'forum' === get_post_type() ): ?>
 							<div class="thumb box user pixel">
 								<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&size=b" alt="<?php echo get_the_author_meta('user_login'); ?>">
 							</div>

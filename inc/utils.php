@@ -61,27 +61,35 @@ require_once get_parent_theme_file_path( '/inc/better-comments-forum.php' );
 add_filter( 'comment_form_defaults', 'rich_text_comment_form' );
 function rich_text_comment_form( $args ) {
 	ob_start();
-	wp_editor( '', 'comment', array(
-		'media_buttons' => true, // show insert/upload button(s) to users with permission
-		'textarea_rows' => '10', // re-size text area
-		'dfw' => false, // replace the default full screen with DFW (WordPress 3.4+)
-		'tinymce' => array(
-			'theme_advanced_buttons1' => 'bold,italic,underline,strikethrough,bullist,numlist,code,blockquote,link,unlink,outdent,indent,|,undo,redo,fullscreen',
-			'theme_advanced_buttons2' => '', // 2nd row, if needed
-			'theme_advanced_buttons3' => '', // 3rd row, if needed
-			'theme_advanced_buttons4' => '' // 4th row, if needed
-		),
-		'quicktags' => array(
-		   'buttons' => 'strong,em,img,ul,ol,li,code,close'
-		)
-	) );
+	wp_editor( '', 'comment' );
 	$args['comment_field'] = ob_get_clean();
 	return $args;
 }
 
 
 
+add_filter( 'ajax_query_attachments_args', 'wpb_show_current_user_attachments' );
 
+// Assinantes podem fazer uploads
+function add_theme_caps() {
+    // gets the author role
+    $role = get_role( 'subscriber' );
+
+    $role->add_cap( 'upload_files' ); 
+    $role->add_cap( 'unfiltered_upload' );
+}
+
+add_action( 'admin_init', 'add_theme_caps');
+add_action( 'init', 'add_theme_caps');
+
+// Filtro Mídias (Apenas suas imagens)
+function wpb_show_current_user_attachments( $query ) {
+    $user_id = get_current_user_id();
+    if ( $user_id && !current_user_can('activate_plugins') && !current_user_can('edit_others_posts') ) {
+        $query['author'] = $user_id;
+    }
+    return $query;
+} 
 
 // Compartilhar (Social)
 function social_sharing_buttons($content) {
