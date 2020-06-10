@@ -39,8 +39,8 @@ function better_comments_forum( $comment, $args, $depth ) {
 							?>
 								
 							<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>">
-								<div class="avatar pixel lg d-md-none">
-									<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $avatar ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=b" alt="<?php echo $avatar ?>">
+								<div class="user-avatar lg d-md-none">
+									<?php echo get_avatar( $comment, 56 ); ?>
 								</div>
 							</a>
 
@@ -49,8 +49,8 @@ function better_comments_forum( $comment, $args, $depth ) {
 								<h5 class="mb-md-3 mb-1" data-toggle="tooltip" title="<?php echo $avatar ?>"><a class="text-inherit author-name" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>"><?php echo $display_name; ?></a></h5>
 
 								<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>">
-									<div class="avatar pixel xl d-none d-md-block">
-										<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $avatar ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=l" alt="<?php echo $avatar ?>">
+									<div class="user-avatar xl d-none d-md-block">
+										<?php echo get_avatar( $comment, 128 ); ?>
 									</div>
 								</a>
 

@@ -16,25 +16,6 @@ register_nav_menus( array(
 // Navbar
 require get_template_directory() . '/inc/bootstrap-navwalker.php';
 
-// Scripts
-function scripts() {
-	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.4.1' );
-	wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.12.1/css/all.css', array(), '5.12.1' );
-	wp_enqueue_style( 'swiper', get_template_directory_uri() . '/assets/css/swiper.min.css', array(), '5.3.1' );
-	wp_enqueue_style( 'selectize', get_template_directory_uri() . '/assets/css/selectize.css', array(), '0.12.6' );
-	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), '1.1' );
-
-	wp_enqueue_script( 'custom-jquery', 'https://code.jquery.com/jquery-3.4.1.min.js', array(), '3.4.1', true );
-	wp_enqueue_script( 'popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array(), '1.16.0', true );
-	wp_enqueue_script( 'jqueryCookie', get_template_directory_uri() . '/assets/js/jquery.cookie.js', array(), '1.4.1', true );
-	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '4.4.1', true );
-	wp_enqueue_script( 'swiper', get_template_directory_uri() . '/assets/js/swiper.min.js', array(), '5.3.1', true );
-	wp_enqueue_script( 'selectize', get_template_directory_uri() . '/assets/js/selectize.min.js', array(), '0.12.6', true );
-	wp_enqueue_script( 'moment', get_template_directory_uri() . '/assets/js/moment.js', array(), '2.24.0', true );
-	wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0', true );
-}
-add_action( 'wp_enqueue_scripts', 'scripts' );
-
 // Paginação
 function the_pagination() {
 	global $wp_query;
@@ -65,8 +46,6 @@ function rich_text_comment_form( $args ) {
 	$args['comment_field'] = ob_get_clean();
 	return $args;
 }
-
-
 
 add_filter( 'ajax_query_attachments_args', 'wpb_show_current_user_attachments' );
 
@@ -168,15 +147,6 @@ function ecs_add_post_state( $post_states, $post ) {
 
 	return $post_states;
 }
-
-// Redirect Login
-// add_action(  'login_init', 'user_registration_login_init'  );
-// function user_registration_login_init () {
-//    if( ! is_user_logged_in() ) {
-//     wp_redirect( home_url() . '/entrar' );
-//     exit;
-//     }
-// }
 
 
 // function admin_stylesheet() {

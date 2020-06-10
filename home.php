@@ -2,7 +2,7 @@
 
 <div class="jumbotron jumbotron-fluid blue">
 	<div class="container">
-		<h1>Notícias</h1>
+		<h1><?php esc_html_e( 'News', 'hfansite' ); ?></h1>
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<h5 class="mb-3">Categorias</h5>
+				<h5 class="mb-3"><?php esc_html_e( 'Categories', 'hfansite' ); ?></h5>
 				<div class="tags grey">
 					<?php
 						$categories = get_categories();
@@ -20,7 +20,7 @@
 					?>
 				</div>
 
-				<h5 class="mt-5 mb-3">Tags</h5>
+				<h5 class="mt-5 mb-3"><?php esc_html_e( 'Tags', 'hfansite' ); ?></h5>
 				<div class="tags">
 					<?php the_tags('', ''); ?>
 				</div>

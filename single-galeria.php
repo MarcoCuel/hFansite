@@ -8,8 +8,8 @@
 			<div class="reading-content size-b">
 
 				<div class="d-flex">
-					<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" class="avatar pixel lg mr-3">
-						<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=b" alt="<?php echo $current_user->user_login ?>">
+					<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" class="user-avatar lg mr-3">
+						<?php echo get_avatar( get_the_author_meta( 'ID' ), 56 ); ?>
 					</a>
 
 					<div class="w-100 d-flex flex-column flex-md-row">
@@ -25,7 +25,7 @@
 									$is_editor = current_user_can('editor') || current_user_can('administrator');
 
 									if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) { ?>
-										<span class="mx-1">·</span> <a href="#" data-toggle="modal" data-target="#editModal"> Editar</a>
+										<span class="mx-1">·</span> <a class="text-primary text-link" data-toggle="modal" data-target="#editModal"> Editar</a>
 									<?php } ?>
 							</div>
 						</div>
@@ -46,12 +46,6 @@
 				</div>
 			</div>
 		</div>
-
-		<?php
-			if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) {
-				get_template_part( 'templates/edit-post');
-			}
-		?>
 							
 		<div class="img-gallery">
 			<div class="reading-content size-b">

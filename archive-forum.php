@@ -2,7 +2,7 @@
 
 <div class="jumbotron jumbotron-fluid orange">
 	<div class="container d-flex align-items-center">
-		<h1>Fórum</h1> <a href="<?php echo home_url() ?>/novo-topico" class="btn btn-light ml-4">Novo tópico</a>
+		<h1><?php esc_html_e( 'Fórum', 'hfansite' ); ?></h1> <a href="<?php echo home_url() ?>/novo-topico" class="btn btn-light ml-4"><?php esc_html_e( 'New topic', 'hfansite' ); ?></a>
 	</div>
 </div>
 
@@ -35,13 +35,13 @@
 					</div>
 					<div class="col-md-6 offset-md-2">
 						<div class="mb-3 text-muted text-uppercase">
-							<small><strong>Últimos tópicos</strong></small>
+							<small><strong><?php esc_html_e( 'Last topics', 'hfansite' ); ?></strong></small>
 						</div>
 						<?php while ($posts->have_posts()) : $posts->the_post(); ?>
 							<div class="mb-3 topic-<?php the_ID(); ?>">
 								<div class="d-flex align-items-center">
-									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" class="avatar pixel sm mr-2">
-										<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s">
+									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" class="user-avatar sm mr-2">
+										<?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?>
 									</a>
 									<div class="w-100 d-md-flex align-items-center">
 										<h5 class="card-title mb-0"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h5>

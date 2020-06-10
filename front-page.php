@@ -6,7 +6,7 @@
 	</div>
 </div>
 
-<section>
+<section class="pb-0">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3 pr-md-3">
@@ -23,7 +23,7 @@
 	</div>
 </section>
 
-<section>
+<section class="pb-0">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9 pr-lg-3">
@@ -37,13 +37,9 @@
 					<?php dynamic_sidebar( 'sidebar_middle' ); ?>
 				</div>
 
-				<div class="section-title mt-4">
+				<!-- <div class="section-title mt-4">
 					<h3>Novos usuários</h3>
 				</div>
-
-				<?php
-
-				?>
 
 				<div class="card">
 					<div class="card-body last-users">
@@ -53,7 +49,7 @@
 								 
 								foreach ($usernames as $username) { ?>
 									<div class="col">
-										<div class="avatar pixel mx-auto" data-toggle="tooltip" title="<?php echo $username->user_login ?>">
+										<div class="user-avatar pixel mx-auto" data-toggle="tooltip" title="<?php echo $username->user_login ?>">
 											<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $username->user_login ); ?>"><img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $username->user_login ?>&action=std&direction=2&head_direction=3&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $username->user_login ?>"></a>
 										</div>
 									</div>
@@ -61,13 +57,13 @@
 							?>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
 </section>
 
-<section>
+<section class="pb-0">
 	<div class="container">
 		<div>
 			<?php dynamic_sidebar( 'sidebar_down' ); ?>

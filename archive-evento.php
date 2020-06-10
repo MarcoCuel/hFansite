@@ -2,7 +2,7 @@
 
 <div class="jumbotron jumbotron-fluid red">
 	<div class="container">
-		<h1>Eventos</h1>
+		<h1><?php esc_html_e( 'Events', 'hfansite' ); ?></h1>
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3 pr-md-3">
-				<h5>Tags</h5>
+				<h5><?php esc_html_e( 'Tags', 'hfansite' ); ?></h5>
 				<div class="tags grey mt-3 mb-4">
 					<?php
 						$categories = get_terms( 'tags_event' );

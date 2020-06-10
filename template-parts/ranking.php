@@ -20,8 +20,8 @@ $results = $wpdb->get_results('
 				$user = get_user_by( 'id', $result->user_id );
 				$name = $user->user_login;
 			?>
-			<div class="avatar pixel lg">
-				<a href="<?php echo get_author_posts_url('', $name); ?>"><img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $name; ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=b" alt="<?php the_title(); ?>"></a>
+			<div class="user-avatar lg">
+				<?php echo get_avatar( $user, 56 ); ?>
 			</div>
 			<div class="content">
 				<h6 class='mb-1'>

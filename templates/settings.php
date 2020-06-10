@@ -99,22 +99,22 @@ get_header();
 					<?php if (count($error) > 0) echo '<div class="alert alert-danger">' . implode("<br />", $error) . '</div>'; ?>
 
 					<form method="post" id="adduser" action="<?php the_permalink(); ?>">
-						<h3 class="mb-3">Nome</h3>
+						<h3 class="mb-3"><?php esc_html_e( 'Name', 'hfansite' ); ?></h3>
 						<div class="form-group form-username">
-							<label for="user_login">Nome de usuário</label>
+							<label for="user_login"><?php esc_html_e( 'Username', 'hfansite' ); ?></label>
 							<input disabled="" class="form-control" name="user_login" type="text" id="user_login" value="<?php the_author_meta('user_login', $current_user->ID); ?>" />
 							<small class="form-text text-muted">Não é possível alterar nomes de usuário.</small>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group form-username">
-									<label for="first-name">Nome</label>
+									<label for="first-name"><?php esc_html_e( 'First name', 'hfansite' ); ?></label>
 									<input class="form-control" name="first-name" type="text" id="first-name" value="<?php the_author_meta('first_name', $current_user->ID); ?>" />
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group form-username">
-									<label for="last-name">Sobrenome</label>
+									<label for="last-name"><?php esc_html_e( 'Last name', 'hfansite' ); ?></label>
 									<input required="" class="form-control" name="last-name" type="text" id="last-name" value="<?php the_author_meta('last_name', $current_user->ID); ?>" />
 								</div>
 							</div>

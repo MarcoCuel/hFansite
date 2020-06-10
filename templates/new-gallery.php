@@ -7,62 +7,6 @@
 get_header();
 ?>
 
-<?php
-	if (is_user_logged_in()){
-		if(isset($_POST['submit'])){
-
-			$user = get_current_user_id();
-
-			if($_FILES['thumbnail']['error'] > 0):
-
-				echo 'Seleciona uma imagem';
-
-			elseif(!isset($_POST['title']) || $_POST['title'] == ''):
-
-				echo 'Escreva um título';
-
-			elseif(!isset($_POST['body']) || $_POST['body'] == ''):
-
-				echo 'Escreva alguma coisa';
-
-			else:
-
-				$title = $_POST['title'];
-				$body = $_POST['body'];
-				$tags = $_POST['tags_gallery'];
-
-				// Create post object
-				$post = array(
-					'post_title'	=> $title,
-					'post_content'	=> $body,
-					'post_type'		=> 'galeria',
-					'post_status'	=> 'publish',
-					'post_author'	=> $user
-				);
-				
-				// Insert the post into the database
-				$post_id = wp_insert_post($post);
-
-				require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-				require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-				require_once(ABSPATH . "wp-admin" . '/includes/media.php');
-
-				$attachment_id = media_handle_upload('thumbnail', $post_id);
-
-				if (!is_wp_error($attachment_id)) { 
-					set_post_thumbnail($post_id, $attachment_id);
-				}
-				
-				if($post_id!=0){
-					// Slá
-				}
-
-				echo '<script>location.href="'.get_permalink($post_id).'"</script>';
-			endif;
-		}
-	}
-?>
-
 <div class="jumbotron jumbotron-fluid min pink">
 	<div class="container text-center">
 		<h1 class="mb-0"><?php echo the_title() ?></h1>
@@ -71,42 +15,84 @@ get_header();
 
 <section>
 	<div class="container">
+		<?php
+			if (is_user_logged_in()){
+				if(isset($_POST['submit'])){
+
+					$user = get_current_user_id();
+
+					if($_FILES['thumbnail']['error'] > 0):
+
+						echo '<div class="alert alert-danger">Selecione uma imagem</div>';
+
+					elseif(!isset($_POST['title']) || $_POST['title'] == ''):
+
+						echo '<div class="alert alert-danger">Escreva um título</div>';
+
+					else:
+
+						$title = $_POST['title'];
+						$body = $_POST['body'];
+						$tags = $_POST['tags_gallery'];
+
+						// Create post object
+						$post = array(
+							'post_title'	=> $title,
+							'post_content'	=> $body,
+							'post_type'		=> 'galeria',
+							'post_status'	=> 'publish',
+							'post_author'	=> $user
+						);
+						
+						// Insert the post into the database
+						$post_id = wp_insert_post($post);
+
+						require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+						require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+						require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+						$attachment_id = media_handle_upload('thumbnail', $post_id);
+
+						if (!is_wp_error($attachment_id)) { 
+							set_post_thumbnail($post_id, $attachment_id);
+						}
+						
+						if($post_id!=0){
+							// Slá
+						}
+
+						echo '<script>location.href="'.get_permalink($post_id).'"</script>';
+					endif;
+				}
+			}
+		?>
+
 		<?php if ( is_user_logged_in() ): ?>
 			<form action="" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<div class="col-md-8 offset-md-2">
-						<div class="drag-n-drop d-none">
-							<div class="mb-3 text-muted">
-								<i class="fas fa-cloud-upload-alt fa-4x"></i>
-							</div>
-							<h4>Arraste e solte uma imagem</h4>
-							<div class="mb-2">ou <a href="#">navegue</a> para escolher um arquivo</div>
-							<small class="text-muted">(recomendado, 1600 × 1200 ou superior, até 10 MB)</small>
-						</div>
-					</div>
 					<div class="col-md-6 offset-md-3">
 
 						<div class="form-group">
-							<label for="title">Imagem</label>
+							<label for="title"><?php esc_html_e( 'Image', 'hfansite' ); ?></label>
 							<input type="file" name="thumbnail" class="form-control files">
 						</div>
 
 						<div class="form-group">
-							<label for="title">Título</label>
-							<input name="title" type="text" class="form-control" id="title" placeholder="Título">
+							<label for="title"><?php esc_html_e( 'Title', 'hfansite' ); ?></label>
+							<input name="title" type="text" class="form-control" id="title" placeholder="<?php esc_html_e( 'Title', 'hfansite' ); ?>">
 						</div>
 
 						<div class="form-group">
-							<label for="tags">Tags <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="Vírgula ou enter para concluir. backspace ou delete para remover."></i></label>
+							<label for="tags"><?php esc_html_e( 'Tags', 'hfansite' ); ?> <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="Vírgula ou enter para concluir. backspace ou delete para remover."></i></label>
 							<input name="tags" type="text" class="form-control" id="tags">
 						</div>
 
 						<div class="form-group">
-							<label for="content">Descrição <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="URLs são vinculadas automaticamente. Quebras de linha e parágrafos são gerados automaticamente. as tags a, em, strong e code são aceitas."></i></label>
-							<textarea name="body" class="form-control" id="content" placeholder="Escrevar algo..."></textarea>
+							<label for="content"><?php esc_html_e( 'Description', 'hfansite' ); ?> <i class="fas fa-question-circle text-muted" data-toggle="tooltip" title="URLs são vinculadas automaticamente. Quebras de linha e parágrafos são gerados automaticamente. as tags a, em, strong e code são aceitas."></i></label>
+							<textarea name="body" class="form-control" id="content" placeholder="<?php esc_html_e( 'Write something...', 'hfansite' ); ?>"></textarea>
 						</div>
 
-						<button type="submit" name="submit" class="btn btn-lg btn-block btn-primary mt-4">Publicar</button>
+						<button type="submit" name="submit" class="btn btn-lg btn-block btn-primary mt-4"><?php esc_html_e( 'Publish', 'hfansite' ); ?></button>
 					</div>
 				</div>
 			</form>

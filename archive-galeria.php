@@ -2,7 +2,7 @@
 
 <div class="jumbotron jumbotron-fluid pink">
 	<div class="container d-flex align-items-center">
-		<h1>Galeria</h1> <a href="<?php echo home_url() ?>/nova-arte" class="btn btn-light ml-4">Nova arte</a>
+		<h1><?php esc_html_e( 'Gallery', 'hfansite' ); ?></h1> <a href="<?php echo home_url() ?>/nova-arte" class="btn btn-light ml-4">Nova arte</a>
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3 pr-md-3 mb-4">
-				<h5 class="mb-3">Tags populares</h5>
+				<h5 class="mb-3"><?php esc_html_e( 'Tags', 'hfansite' ); ?></h5>
 				<div class="tags grey">
 					<?php
 						$categories = get_terms( 'tags_gallery' );

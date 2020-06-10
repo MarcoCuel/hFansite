@@ -25,7 +25,7 @@ $wp_user_query = new WP_User_Query( array(
 	<div class="container">
 		<div class="reading-content">
 			<form action="<?php echo home_url() ?>/" method="get" class="mb-4">
-				<input class="form-control alt" type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="Buscar..." />
+				<input class="form-control alt" type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="<?php esc_html_e( 'Search', 'hfansite' ); ?>" />
 			</form>
 
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -40,8 +40,8 @@ $wp_user_query = new WP_User_Query( array(
 								<img src="<?php bloginfo('template_directory'); ?>/assets/image/default-cover.png" alt="<?php the_title(); ?>" />
 							</div>
 						<?php elseif( 'forum' === get_post_type() ): ?>
-							<div class="thumb box user pixel">
-								<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&size=b" alt="<?php echo get_the_author_meta('user_login'); ?>">
+							<div class="thumb box user">
+								<?php echo get_avatar( get_the_author_meta( 'ID' ), 150 ); ?>
 							</div>
 						<?php elseif( 'destaque' === get_post_type() ): ?>
 							<div class="thumb box user pixel">
@@ -82,9 +82,12 @@ $wp_user_query = new WP_User_Query( array(
 			<?php endwhile?>
 			<?php else: ?>
 				<div class="text-center" style="padding: 5rem 0">
-					<h2>Nenhum resultado encontrado.</h2>
-					<p class="text-muted">Sua busca por "<strong><?php the_search_query(); ?></strong>" não retornou resultados.<br>
-					Tente novamente ou desista.</p>
+					<h2><?php esc_html_e( 'No results found.', 'hfansite' ); ?></h2>
+
+					<p class="text-muted"><?php
+						/* translators: %s: search term */
+						printf( esc_attr__( 'Your search for "%s" returned no results.', 'hfansite' ), '<strong>' . get_search_query() . '</strong>' );
+					?></p>
 				</div>
 			<?php endif; ?>
 

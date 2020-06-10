@@ -1,7 +1,7 @@
 <div class="card topic topic-<?php the_ID(); ?>">
 	<div class="card-body">
-		<div class="avatar pixel lg mr-3">
-			<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo get_the_author_meta('user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=b" alt="<?php echo get_the_author_meta('user_login'); ?>">
+		<div class="user-avatar lg mr-3">
+			<?php echo get_avatar( get_the_author_meta( 'ID' ), 56 ); ?>
 		</div>
 		<div class="content">
 			<h5 class="card-title mb-2 text-ellipsis"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h5>

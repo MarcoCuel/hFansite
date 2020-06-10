@@ -1,8 +1,7 @@
 <?php
-
 	$theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
-
 ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> data-theme="<?php echo $theme; ?>">
 <head>
@@ -42,36 +41,37 @@
 					<?php global $current_user; wp_get_current_user();?>
 					<div class="dropdown mr-4">
 						<div id="dropnew" class="btn btn-sm btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-plus mr-1"></i> Novo
+							<i class="fas fa-plus mr-1"></i> <?php esc_html_e( 'New', 'hfansite' ); ?>
 						</div>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropnew">
-							<a class="dropdown-item" href="<?php echo home_url() ?>/novo-topico">Tópico</a>
-							<a class="dropdown-item" href="<?php echo home_url() ?>/nova-arte">Arte</a>
+							<a class="dropdown-item" href="<?php echo home_url() ?>/novo-topico"><?php esc_html_e( 'Topic', 'hfansite' ); ?></a>
+							<a class="dropdown-item" href="<?php echo home_url() ?>/nova-arte"><?php esc_html_e( 'Art', 'hfansite' ); ?></a>
 							<?php if(current_user_can('administrator')) { ?>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="<?php echo admin_url('post-new.php') ?>">Notícia</a>
-								<a class="dropdown-item" href="<?php echo admin_url('post-new.php?post_type=evento'); ?>">Evento</a>
-								<a class="dropdown-item" href="<?php echo admin_url('post-new.php?post_type=publicidade'); ?>">Publicidade</a>
+								<a class="dropdown-item" href="<?php echo admin_url('post-new.php') ?>"><?php esc_html_e( 'News', 'hfansite' ); ?></a>
+								<a class="dropdown-item" href="<?php echo admin_url('post-new.php?post_type=evento'); ?>"><?php esc_html_e( 'Event', 'hfansite' ); ?></a>
+								<a class="dropdown-item" href="<?php echo admin_url('post-new.php?post_type=publicidade'); ?>"><?php esc_html_e( 'Advertising', 'hfansite' ); ?></a>
 							<?php } ?>
 						</div>
 					</div>
 
 					<div class="dropdown">
 						<div id="dropUser" class="d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<div class="avatar pixel">
-								<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $current_user->user_login ?> &action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $current_user->user_login ?>"></div>
+							<div class="user-avatar">
+								<?php echo get_avatar( $current_user->id, 32 ); ?>
+							</div>
 						</div>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropUser">
-							<a class="dropdown-item" href="<?php echo home_url() ?>/perfil/<?php echo $current_user->user_login ?>"><i class="fas fa-user text-muted mr-2"></i> Perfil</a>
+							<a class="dropdown-item" href="<?php echo home_url() ?>/perfil/<?php echo $current_user->user_login ?>"><i class="fas fa-user text-muted mr-2"></i> <?php esc_html_e( 'Profile', 'hfansite' ); ?></a>
 							<label class="theme-switch dropdown-item" for="checkbox">
-								<i class="fas fa-moon text-muted mr-2"></i> Modo escuro
+								<i class="fas fa-moon text-muted mr-2"></i> <?php esc_html_e( 'Dark mode', 'hfansite' ); ?>
 								<div class="custom-control custom-switch ml-auto">
 									<input type="checkbox" class="custom-control-input" id="checkbox" <?php echo $theme == 'dark' ? ' checked' : ''; ?>>
 									<label class="custom-control-label" for="checkbox"></label>
 								</div>
 							</label>
-							<a class="dropdown-item" href="<?php echo home_url() ?>/configuracoes"><i class="fas fa-cog text-muted mr-2"></i> Configurações</a>
-							<a class="dropdown-item" href="<?php echo wp_logout_url( home_url() ); ?>"><i class="fas fa-sign-out-alt text-muted mr-2"></i> Sair</a>
+							<a class="dropdown-item" href="<?php echo home_url() ?>/configuracoes"><i class="fas fa-cog text-muted mr-2"></i> <?php esc_html_e( 'Settings', 'hfansite' ); ?></a>
+							<a class="dropdown-item" href="<?php echo wp_logout_url( home_url() ); ?>"><i class="fas fa-sign-out-alt text-muted mr-2"></i> <?php esc_html_e( 'Sign Out', 'hfansite' ); ?></a>
 						</div>
 					</div>
 				<?php else: ?>
@@ -82,18 +82,18 @@
 						</label>
 					</div>
 
-					<a	href="<?php echo home_url() ?>/entrar" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" class="btn">Entrar</a>
+					<a	href="<?php echo home_url() ?>/wp-login.php" class="btn btn-primary btn-login"><?php esc_html_e( 'Sign in', 'hfansite' ); ?></a>
 				<?php endif; ?>
 
 				<div class="search">
 					<label for="search"><i class="fas fa-search"></i></label>
 
 					<form action="<?php echo home_url() ?>/" method="get">
-						<input type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="Buscar..." />
+						<input type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="<?php esc_html_e( 'Search', 'hfansite' ); ?>" />
 					</form>
 				</div>
 			</div>
 		</div>
 	</nav>
 
-	<div class="site-wrapper">
+	<main>

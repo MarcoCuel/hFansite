@@ -30,8 +30,8 @@
 
 			<div class="infos">
 				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ); ?>" class="d-flex align-items-center mx-3 mt-3">
-					<div class="avatar pixel sm mr-2">
-						<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo the_author_meta( 'user_login'); ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $current_user->user_login ?>">
+					<div class="user-avatar sm mr-2">
+						<?php echo get_avatar( get_the_author_meta( 'ID' ), 24 ); ?>
 					</div>
 
 					<span data-toggle="tooltip" title="<?php echo get_the_author_meta('user_login'); ?>"><?php echo get_the_author(); ?></span>
@@ -53,18 +53,12 @@
 				$is_editor = current_user_can('editor') || current_user_can('administrator');
 
 				if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) { ?>
-					<div class="mx-3 mt-3"><a href="#" data-toggle="modal" data-target="#editModal"><i class="fas fa-pen mr-2"></i> Editar</a></div>
+					<div class="mx-3 mt-3"><a class="text-link" data-toggle="modal" data-target="#editModal"><i class="fas fa-pen mr-2"></i> Editar</a></div>
 				<?php } ?>
 
 			</div>
 		</div>
 	</div>
-
-	<?php
-		if ((is_user_logged_in() && $author_id === $current_id) || $is_editor) {
-			get_template_part( 'templates/edit-post');
-		}
-	?>
 
 	<section>
 		<div class="container">

@@ -37,19 +37,11 @@ function better_comments( $comment, $args, $depth ) {
 					$display_name = get_the_author_meta('display_name', $comment_author_id);
 				?>
 					
-				<?php if( '0' == $comment->comment_parent ): ?>
-					<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>">
-						<div class="avatar pixel lg">
-							<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $avatar ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=b" alt="<?php echo $current_user->user_login ?>">
-						</div>
-					</a>
-				<? else: ?>
-					<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>">
-						<div class="avatar pixel">
-							<img src="https://www.habbo.com.br/habbo-imaging/avatarimage?&user=<?php echo $avatar ?>&action=std&direction=2&head_direction=2&img_format=png&gesture=std&headonly=0&size=s" alt="<?php echo $current_user->user_login ?>">
-						</div>
-					</a>
-				<?php endif; ?>
+				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ), $avatar ); ?>">
+					<div class="user-avatar lg">
+						<?php echo get_avatar( $comment, 56 ); ?>
+					</div>
+				</a>
 			</div><!-- .comment-author -->
 			<div class="comment-details">
 				<div class="comment-meta commentmetadata">

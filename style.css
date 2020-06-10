@@ -263,7 +263,7 @@ strong {
 
 .jumbotron.hero {
 	background-color: #7DD4E5;
-	background-image: url(http://localhost:10000/wp-content/themes/habboz/assets/image/public.png), linear-gradient(-135deg, transparent, #15B3DB), url(http://marcocuel.com/p/hhtb/tile.png);
+	background-image: url(assets/image/public.png), linear-gradient(-135deg, transparent, #15B3DB), url(assets/image/tile.png);
 	background-repeat: no-repeat, repeat, repeat;
 	background-position: calc(50% + 180px) -140px, center;
 	image-rendering: pixelated;
@@ -382,11 +382,11 @@ strong {
 	font-size: 1.75em;
 }
 
-.jumbotron .avatar {
+.jumbotron .user-avatar {
 	background-color: rgba(240,240,240,0.3)
 }
 
-.jumbotron.white .avatar {
+.jumbotron.white .user-avatar {
 	background-color: #eee;
 }
 
@@ -979,6 +979,13 @@ section {
 	background-color: #eee;
 }
 
+.card.search .thumb.box.user:not(.pixel) img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	margin: 0;
+}
+
 .card.search .thumb.box img {
 	width: auto;
 	height: auto;
@@ -1011,22 +1018,16 @@ section {
 	margin-bottom: 0;
 }
 
-.card.featured-user .card-body .avatar {
+.card.featured-user .card-body .user-avatar {
 	min-width: 72px;
 	height: 72px;
 	margin-right: 1.25rem;
 }
 
-.card.featured-user .card-body .avatar img {
-	margin-top: -4px;
-	margin-left: 4px;
-}
-
-.list .card.featured-user:last-child .card-body .avatar {
+.list .card.featured-user:last-child .card-body .user-avatar {
 	margin-left: 1.25rem;
 	margin-right: 0;
 	order: 2;
-	transform: rotateY(180deg);
 }
 
 .card.achievement {
@@ -1156,7 +1157,7 @@ section {
 	background-color: rgba(255,255,255,0.05)
 }
 
-.section-topic .side .avatar {
+.section-topic .side .user-avatar {
 	margin: 0 auto;
 }
 
@@ -1354,17 +1355,11 @@ section {
 	padding-left: 3rem;
 }
 
-
-.commentlist .children .avatar img {
-	margin-left: 2px;
-	margin-top: -2px;
-}
-
 .commentlist .comment-body {
 	margin-bottom: 1rem;
 }
 
-.commentlist .comment-body .avatar {
+.commentlist .comment-body .user-avatar {
 	margin-bottom: 1rem;
 }
 
@@ -1561,55 +1556,54 @@ blockquote p:last-child {
 	image-rendering: pixelated;
 }
 
-.avatar {
+.user-avatar {
 	background-color: rgba(0,0,0,0.1);
 	width: 32px;
 	min-width: 32px;
 	height: 32px;
 	border-radius: 40%;
 	overflow: hidden;
+	position: relative;
 }
 
-[data-theme="dark"] .avatar {
+.user-avatar:after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	border: 1px solid rgba(0,0,0,0.05);
+	border-radius: 40%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+[data-theme="dark"] .user-avatar {
 	background-color: rgba(255,255,255,0.05);
 }
 
-.avatar img {
-	margin-left: 2px;
-	margin-top: -4px;
+.user-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
 
-.avatar.sm {
+.user-avatar.sm {
 	width: 24px;
 	min-width: 24px;
 	height: 24px;
 }
 
-.avatar.sm img {
-	margin-left: -3px;
-	margin-top: -9px;
-}
-
-.avatar.lg {
+.user-avatar.lg {
 	width: 56px;
 	min-width: 56px;
 	height: 56px;
 }
 
-.avatar.lg img {
-	margin-left: -4px;
-	margin-top: -12px;
-}
-
-
-.avatar.xl {
+.user-avatar.xl {
 	width: 128px;
 	min-width: 128px;
 	height: 128px;
-}
-
-.avatar.xl img {
-	margin-top: -12px;
 }
 
 
@@ -1800,6 +1794,10 @@ hr.ou:before {
 
 .text-pink {
 	color: #DD4496 !important;
+}
+
+.text-link {
+	cursor: pointer;
 }
 
 .text-link {
@@ -2334,6 +2332,7 @@ button.close:hover {
 	color: var(--color-primary);
 	text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	width: 56px;
+	min-width: 56px;
 	height: 56px;
 	border-radius: 50%;
 	margin-right: 1rem;
@@ -2349,12 +2348,17 @@ button.close:hover {
 	color: #fff;
 }
 
+.player .play.pause .fas:before {
+	content: "\f04b";
+}
+
 .player .volume {
 	background-color: rgba(0,0,0,0.05);
 	color: #666;
 	border-radius: 0.5rem;
 	padding: 0.5rem 0.75rem;
 }
+
 
 @media (min-width: 768px) {
 	.player {
@@ -2454,6 +2458,7 @@ button.close:hover {
 .btn-primary {
 	background-color: var(--color-primary);
 	border-color: var(--color-primary);
+	color: #fff !important;
 }
 .btn-primary:hover {
 	background-color: var(--color-primary-darker);
@@ -2528,7 +2533,7 @@ button.close:hover {
 }
 
 
-.site-wrapper {
+main {
 	overflow: hidden;
 	min-height: calc(100vh - 324px);
 }
@@ -2560,16 +2565,14 @@ button.close:hover {
 
 body.single-post,
 body.single-evento,
-body.search,
-body.page-template-login {
+body.search {
 	background-color: #fff;
 }
 
 
 [data-theme="dark"] body.single-post,
 [data-theme="dark"] body.single-evento,
-[data-theme="dark"] body.search,
-[data-theme="dark"] body.page-template-login {
+[data-theme="dark"] body.search {
 	background-color: var(--color-bg);
 }
 
@@ -2772,17 +2775,20 @@ body.admin-bar {
 @media (min-width: 768px) {
 	.row-forum .col {
 		min-width: 50%;
+		max-width: 50%;
 	}
 
 	.row-gallery .col {
-		min-width: 30%;
+		min-width: 33.333333%;
+		max-width: 33.333333%;
 	}
 }
 
 @media (min-width: 992px) {
 	.row-event .col,
 	.row-news .col {
-		min-width: 30%;
+		min-width: 33.333333%;
+		max-width: 33.333333%;
 	}
 
 	.row-gallery .col {
@@ -2815,3 +2821,29 @@ body.admin-bar {
 	border-color: var(--color-primary);
 }
 
+
+
+/* Pace */
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: var(--color-primary);
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 4px;
+}
